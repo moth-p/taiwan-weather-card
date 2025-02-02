@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="./src/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/loadingio/loading.css@v2.0.0/dist/loading.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .dropDownBtn {
+        font-family: Satoshi-BoldItalic;
+      }
+
+      .cursor {
+        display: inline-block;
+        animation: blink 0.5s infinite alternate;
+      }
+
+      @keyframes blink {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      .dialogArea {
+        letter-spacing: 1px;
+        line-height: 45px;
+      }
+    </style>
+  </head>
+  <body class="w-screen h-screen flex justify-center items-center">
+    <main class="container relative w-[950px] flex justify-center items-center">
+      <div
+        class="btnsArea absolute top-1 left-5 p-5 flex justify-center gap-5 text-[#EAEAEA] text-xl font-bold"
+      >
+        <button
+          class="dropDownBtn cursor-pointer border-2 py-3 px-5 rounded-full hover:bg-[#2398CC]"
+        >
+          Areas&nbsp;&nbsp;<i class="fa-solid fa-caret-down"></i>
+        </button>
+      </div>
+      <div
+        class="absolute top-1 right-5 p-5 flex justify-center gap-5 text-[#EAEAEA] text-xl font-bold"
+      >
+        <button
+          class="resetBtn cursor-pointer border-2 p-3 rounded-full hover:bg-[#2398CC] active:opacity-50"
+        >
+          <i class="fa-solid fa-reply"></i>
+        </button>
+      </div>
+      <img
+        src="./src/img/dialog.png"
+        class="animate__animated animate__fadeIn animate__delay-0.5s absolute right-[270px] bottom-28 w-[32%]"
+        alt=""
+      />
+      <div
+        class="dialogArea animate__animated animate__fadeIn animate__delay-0.5s absolute w-[200px] h-[120px] right-[335px] bottom-[150px] text-[#EAEAEA] text-3xl font-bold"
+      >
+        <span id="dialog"></span><span class="cursor">|</span>
+      </div>
+
+      <img
+        src="./src/img/bg-1-sun.png"
+        class="ld ld-bounceAlt absolute w-[20%] bottom-40 right-16"
+        style="animation-duration: 6s"
+        alt=""
+      />
+      <img src="./src/img/bg.png" alt="" />
+    </main>
+
+    <script>
+      let string = "今日の天気がどうですか";
+      let str = string.split("");
+      let el = document.getElementById("dialog"); // 用來顯示文字的元素
+
+      function animate() {
+        if (str.length > 0) {
+          el.innerHTML += str.shift(); // 逐字顯示
+        } else {
+          clearTimeout(running); // 文字顯示完畢後清除計時器
+        }
+
+        let running = setTimeout(animate, 150); // 每150ms顯示一個字
+      }
+
+      setTimeout(animate, 800);
+    </script>
+  </body>
+</html>

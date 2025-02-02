@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Canavar";
+  src: url("./fonts/CANAVAR.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi-MediumItalic";
+  src: url("./fonts/Satoshi-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi-BoldItalic";
+  src: url("./fonts/Satoshi-BoldItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+  font-style: italic;
+}
