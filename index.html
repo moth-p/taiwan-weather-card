@@ -17,14 +17,21 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Dosis:wght@200..800&family=DotGothic16&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Noto+Sans+TC:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parkinsans:wght@300..800&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sawarabi+Gothic&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       * {
         box-sizing: border-box;
       }
 
-      .dropDownBtn {
-        font-family: Satoshi-BoldItalic;
+      .chooseBtn {
+        font-family: PixelifySans;
+        letter-spacing: 1px;
       }
 
       .cursor {
@@ -41,68 +48,256 @@
         }
       }
 
-      .dialogArea {
+      .dialogContent {
+        font-family: "DotGothic16", serif;
         letter-spacing: 1px;
         line-height: 45px;
       }
+
+      .areasDropMenu {
+        font-family: "DotGothic16", serif;
+        line-height: 25px;
+        letter-spacing: 1px;
+      }
     </style>
   </head>
+
   <body class="w-screen h-screen flex justify-center items-center">
     <main class="container relative w-[950px] flex justify-center items-center">
-      <div
-        class="btnsArea absolute top-1 left-5 p-5 flex justify-center gap-5 text-[#EAEAEA] text-xl font-bold"
-      >
-        <button
-          class="dropDownBtn cursor-pointer border-2 py-3 px-5 rounded-full hover:bg-[#2398CC]"
+      <nav>
+        <!-- 左邊 區域按鈕 -->
+        <div
+          class="btnLeft z-30 absolute top-1 left-5 p-5 flex justify-center gap-5 text-[#EAEAEA] text-xl font-bold"
         >
-          Areas&nbsp;&nbsp;<i class="fa-solid fa-caret-down"></i>
-        </button>
-      </div>
-      <div
-        class="absolute top-1 right-5 p-5 flex justify-center gap-5 text-[#EAEAEA] text-xl font-bold"
-      >
-        <button
-          class="resetBtn cursor-pointer border-2 p-3 rounded-full hover:bg-[#2398CC] active:opacity-50"
+          <div
+            class="chooseBtn cursor-pointer border-2 py-3 px-5 rounded-full hover:bg-[#19BCA8] active:opacity-50"
+          >
+            <span>
+              AREAS&nbsp;&nbsp;<span class="caret"
+                ><i class="fa-solid fa-caret-down"></i
+              ></span>
+            </span>
+          </div>
+        </div>
+
+        <!-- 下拉式選單 -->
+        <div
+          class="areasDropMenu hidden absolute top-24 left-24 w-28 h-60 bg-[#EAEAEA] border-2 border-[#19BCA8] rounded-md overflow-auto px-2"
         >
-          <i class="fa-solid fa-reply"></i>
-        </button>
-      </div>
+          <div class="text-md font-bold text-[#5E5D5D] w-20 flex-col gap-40">
+            <div
+              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+            >
+              北部
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              基隆市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              臺北市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              新北市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              宜蘭縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              桃園市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              新竹縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              新竹市
+            </div>
+
+            <div
+              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+            >
+              中部
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              苗栗縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              南投縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              臺中市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              彰化縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              雲林縣
+            </div>
+
+            <div
+              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+            >
+              南部
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              嘉義縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              嘉義市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              臺南市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              高雄市
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              屏東縣
+            </div>
+
+            <div
+              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+            >
+              東部
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              臺東縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              花蓮縣
+            </div>
+
+            <div
+              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+            >
+              離島
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              金門縣
+            </div>
+            <div class="cursor-pointer hover:text-[#19BCA8] active:opacity-50">
+              連江縣
+            </div>
+            <div
+              class="cursor-pointer hover:text-[#19BCA8] active:opacity-50 mb-6"
+            >
+              澎湖縣
+            </div>
+          </div>
+        </div>
+
+        <!-- 右邊 重置按鈕 -->
+        <div
+          class="btnRight absolute top-1 right-5 p-5 flex justify-center gap-5 text-[#EAEAEA] text-xl font-bold"
+        >
+          <button
+            class="resetBtn cursor-pointer border-2 p-3 rounded-full hover:bg-[#19BCA8] active:opacity-50"
+          >
+            <i class="fa-solid fa-reply"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- img 對話框 -->
       <img
         src="./src/img/dialog.png"
-        class="animate__animated animate__fadeIn animate__delay-1s absolute right-[270px] bottom-28 w-[32%]"
+        class="dialogFrame animate__animated animate__fadeIn animate__delay-1s absolute right-[270px] bottom-28 w-[32%]"
         alt=""
       />
+
+      <!-- 對話框 內容 -->
       <div
-        class="dialogArea animate__animated animate__fadeIn animate__delay-1s absolute w-[200px] h-[120px] right-[335px] bottom-[150px] text-[#EAEAEA] text-3xl font-bold"
+        class="dialogContent animate__animated animate__fadeIn animate__delay-1s absolute w-[200px] h-[120px] right-[335px] bottom-[150px] text-[#EAEAEA] text-3xl font-bold"
       >
         <span id="dialog"></span><span class="cursor">|</span>
       </div>
 
+      <!-- img 太陽的頭 -->
       <img
         src="./src/img/bg-1-sun.png"
         class="ld ld-bounceAlt absolute w-[20%] bottom-40 right-16"
         style="animation-duration: 6s"
         alt=""
       />
+
+      <!-- img 背景圖 -->
       <img src="./src/img/bg.png" alt="" />
     </main>
 
     <script>
-      let string = "今日の天気がどうですか";
-      let str = string.split("");
-      let el = document.getElementById("dialog"); // 用來顯示文字的元素
+      const areasDropMenu = document.querySelector(".areasDropMenu");
+      const chooseBtn = document.querySelector(".chooseBtn");
+      const caret = document.querySelector(".caret");
+
+      chooseBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // 防止事件冒泡
+
+        const isHidden = areasDropMenu.classList.toggle("hidden");
+
+        // 根據選單狀態切換 caret 圖示
+        caret.querySelector("i").classList.toggle("fa-caret-up", !isHidden);
+        caret.querySelector("i").classList.toggle("fa-caret-down", isHidden);
+
+        if (!isHidden) {
+          areasDropMenu.scrollTop = 0; // 內容回到最上方
+        }
+      });
+
+      // 點擊 window 關閉 areasDropMenu
+      window.addEventListener("click", (e) => {
+        if (
+          !chooseBtn.contains(e.target) &&
+          !areasDropMenu.contains(e.target)
+        ) {
+          areasDropMenu.classList.add("hidden");
+          caret.querySelector("i").classList.add("fa-caret-down");
+          caret.querySelector("i").classList.remove("fa-caret-up");
+        }
+      });
+
+      const string = "今日の天気はどうですか";
+      const strOriginal = string.split(""); // 原始字串陣列
+      const el = document.getElementById("dialog");
+      const dialogFrame = document.querySelector(".dialogFrame");
+      const dialogContent = document.querySelector(".dialogContent");
+      const resetBtn = document.querySelector(".resetBtn");
+      let running; // 計時器變數
 
       function animate() {
-        if (str.length > 0) {
-          el.innerHTML += str.shift(); // 逐字顯示
+        if (strOriginal.length > 0) {
+          el.innerHTML += strOriginal.shift(); // 逐字顯示
+          running = setTimeout(animate, 150);
         } else {
-          clearTimeout(running); // 文字顯示完畢後清除計時器
+          clearTimeout(running); // 停止計時器
         }
-
-        let running = setTimeout(animate, 150); // 每150ms顯示一個字
       }
 
-      setTimeout(animate, 2500);
+      // 2.5 秒後開始顯示對話
+      setTimeout(animate, 1800);
+
+      // 點擊 Reset 按鈕時，重置動畫
+      resetBtn.addEventListener("click", () => {
+        clearTimeout(running); // 清除計時器
+        el.innerHTML = ""; // 清空文字
+        strOriginal.length = 0; // 清空舊字串
+        strOriginal.push(...string.split("")); // 重新填充陣列
+
+        // 重新啟動動畫
+        setTimeout(animate, 1000);
+
+        // 重置 Tailwind 動畫效果
+        dialogFrame.classList.remove("animate__fadeIn");
+        dialogContent.classList.remove("animate__fadeIn");
+
+        // 觸發瀏覽器 強制回流／重繪 (Reflow)
+        void dialogFrame.offsetWidth;
+        void dialogContent.offsetWidth;
+        // dialogFrame.getBoundingClientRect();
+        // dialogContent.getBoundingClientRect();
+
+        // 重新加回動畫
+        dialogFrame.classList.add("animate__fadeIn");
+        dialogContent.classList.add("animate__fadeIn");
+      });
     </script>
   </body>
 </html>
