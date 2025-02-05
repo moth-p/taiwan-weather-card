@@ -1558,6 +1558,9 @@
   .border-\[\#19BCA8\] {
     border-color: #19BCA8;
   }
+  .border-\[\#586DE8\] {
+    border-color: #586DE8;
+  }
   .bg-\(--my_variable\) {
     background-color: var(--my_variable);
   }
@@ -2411,10 +2414,24 @@
       }
     }
   }
+  .hover\:bg-\[\#586DE8\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #586DE8;
+      }
+    }
+  }
   .hover\:text-\[\#19BCA8\] {
     &:hover {
       @media (hover: hover) {
         color: #19BCA8;
+      }
+    }
+  }
+  .hover\:text-\[\#586DE8\] {
+    &:hover {
+      @media (hover: hover) {
+        color: #586DE8;
       }
     }
   }
