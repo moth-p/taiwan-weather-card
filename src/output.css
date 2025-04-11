@@ -605,23 +605,8 @@
   .right-\[270px\] {
     right: 270px;
   }
-  .right-\[280px\] {
-    right: 280px;
-  }
-  .right-\[2px\] {
-    right: 2px;
-  }
-  .right-\[330px\] {
-    right: 330px;
-  }
   .right-\[335px\] {
     right: 335px;
-  }
-  .right-\[340px\] {
-    right: 340px;
-  }
-  .bottom-20 {
-    bottom: calc(var(--spacing) * 20);
   }
   .bottom-28 {
     bottom: calc(var(--spacing) * 28);
@@ -631,12 +616,6 @@
   }
   .bottom-\[150px\] {
     bottom: 150px;
-  }
-  .bottom-\[155px\] {
-    bottom: 155px;
-  }
-  .bottom-\[160px\] {
-    bottom: 160px;
   }
   .left-5 {
     left: calc(var(--spacing) * 5);
@@ -892,9 +871,6 @@
   }
   .w-20 {
     width: calc(var(--spacing) * 20);
-  }
-  .w-24 {
-    width: calc(var(--spacing) * 24);
   }
   .w-28 {
     width: calc(var(--spacing) * 28);
@@ -1554,9 +1530,6 @@
   .border-solid {
     --tw-border-style: solid;
     border-style: solid;
-  }
-  .border-\[\#19BCA8\] {
-    border-color: #19BCA8;
   }
   .border-\[\#586DE8\] {
     border-color: #586DE8;
@@ -2407,24 +2380,10 @@
   .transform-view {
     transform-box: view-box;
   }
-  .hover\:bg-\[\#19BCA8\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #19BCA8;
-      }
-    }
-  }
   .hover\:bg-\[\#586DE8\] {
     &:hover {
       @media (hover: hover) {
         background-color: #586DE8;
-      }
-    }
-  }
-  .hover\:text-\[\#19BCA8\] {
-    &:hover {
-      @media (hover: hover) {
-        color: #19BCA8;
       }
     }
   }

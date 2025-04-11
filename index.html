@@ -242,13 +242,13 @@
       <!-- img 對話框 -->
       <img
         src="./src/img/dialog.png"
-        class="dialogFrame animate__animated animate__fadeIn animate__delay-1s absolute right-[270px] bottom-28 w-[32%]"
+        class="dialogFrame animate__animated animate__fadeIn absolute right-[270px] bottom-28 w-[32%]"
         alt=""
       />
 
       <!-- 對話框 內容 -->
       <div
-        class="dialogContent animate__animated animate__fadeIn animate__delay-1s absolute w-[200px] h-[120px] right-[335px] bottom-[150px] text-[#EAEAEA] text-3xl font-bold"
+        class="dialogContent animate__animated animate__fadeIn animate__delay-0.5s absolute w-[200px] h-[120px] right-[335px] bottom-[150px] text-[#EAEAEA] text-3xl font-bold"
       >
         <span id="dialog"></span><span class="cursor">|</span>
       </div>
@@ -304,17 +304,17 @@
       const resetBtn = document.querySelector(".resetBtn");
       let running; // 計時器變數
 
-      function animate() {
+      function dialogShow() {
         if (word.length > 0) {
           el.innerHTML += word.shift(); // 逐字顯示
-          running = setTimeout(animate, 150);
+          running = setTimeout(dialogShow, 150);
         } else {
           clearTimeout(running); // 停止計時器
         }
       }
 
       // 2.5 秒後開始顯示對話
-      setTimeout(animate, 1800);
+      setTimeout(dialogShow, 1800);
 
       // 點擊 Reset 按鈕時，重置動畫
       resetBtn.addEventListener("click", () => {
@@ -325,10 +325,10 @@
         word.length = 0; // 清空舊字串
         word.push(...words.split("")); // 重新填充陣列
 
-        // 重新啟動動畫
-        setTimeout(animate, 1000);
+        // 重新載入 dialogShow 動畫
+        setTimeout(dialogShow, 1000);
 
-        // 重置 Tailwind 動畫效果
+        // 移除 fadeIn 動畫
         dialogFrame.classList.remove("animate__fadeIn");
         dialogContent.classList.remove("animate__fadeIn");
 
@@ -338,7 +338,7 @@
         // dialogFrame.getBoundingClientRect();
         // dialogContent.getBoundingClientRect();
 
-        // 重新加回動畫
+        // 重新加回 fadeIn 動畫
         dialogFrame.classList.add("animate__fadeIn");
         dialogContent.classList.add("animate__fadeIn");
       });
