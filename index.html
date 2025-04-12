@@ -23,6 +23,7 @@
       href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Dosis:wght@200..800&family=DotGothic16&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Noto+Sans+TC:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parkinsans:wght@300..800&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sawarabi+Gothic&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
       * {
@@ -59,12 +60,27 @@
         line-height: 25px;
         letter-spacing: 1px;
       }
+
+      .displayResults {
+        font-family: "DotGothic16", serif;
+        letter-spacing: 3px;
+      }
+
+      .chosenLocation {
+        letter-spacing: 8px;
+      }
+
+      .hiddenText {
+        opacity: 0;
+      }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://assets.codepen.io/16327/ScrambleTextPlugin3.min.js"></script>
   </head>
 
   <body class="w-screen h-screen flex justify-center items-center">
     <main class="container relative w-[950px] flex justify-center items-center">
-      <nav>
+      <section>
         <!-- 左邊 區域按鈕 -->
         <div
           class="btnLeft z-30 absolute top-1 left-5 p-5 flex justify-center gap-5 text-[#EAEAEA] text-xl font-bold"
@@ -86,7 +102,7 @@
         >
           <div class="text-md font-bold text-[#5E5D5D] w-20 flex-col gap-40">
             <div
-              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+              class="areaName sticky top-0 bg-[#EAEAEA] text-md ps-2 h-10 py-2 text-gray-400"
             >
               北部
             </div>
@@ -127,7 +143,7 @@
             </div>
 
             <div
-              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+              class="areaName sticky top-0 bg-[#EAEAEA] text-md ps-2 h-10 py-2 text-gray-400"
             >
               中部
             </div>
@@ -158,7 +174,7 @@
             </div>
 
             <div
-              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+              class="areaName sticky top-0 bg-[#EAEAEA] text-md ps-2 h-10 py-2 text-gray-400"
             >
               南部
             </div>
@@ -194,7 +210,7 @@
             </div>
 
             <div
-              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+              class="areaName sticky top-0 bg-[#EAEAEA] text-md ps-2 h-10 py-2 text-gray-400"
             >
               東部
             </div>
@@ -210,7 +226,7 @@
             </div>
 
             <div
-              class="areaName sticky top-0 bg-[#EAEAEA] text-lg h-10 py-2 text-gray-400"
+              class="areaName sticky top-0 bg-[#EAEAEA] text-md ps-2 h-10 py-2 text-gray-400"
             >
               離島
             </div>
@@ -237,7 +253,49 @@
             <i class="fa-solid fa-reply"></i>
           </button>
         </div>
-      </nav>
+      </section>
+
+      <section
+        class="displayResults opacity-0 transition-opacity duration-300 absolute top-[140px] left-[325px] w-[300px] h-[395px] p-5"
+      >
+        <div
+          class="w-full h-full text-[#EAEAEA] bg-[#586DE8] flex flex-col justify-start items-start gap-3 p-8"
+        >
+          <div class="text-3xl font-bold mb-5">
+            <span class="chosenLocation hiddenText">台中市</span>
+          </div>
+          <div
+            class="bg--[#EAEAEA] w-full h-1 mb-5 flex justify-center items-center text-indigo-300"
+          >
+            ＊＊＊＊＊＊＊＊＊＊
+          </div>
+          <div class="text-md ps-2">
+            <i class="fa-solid fa-hand-point-right"></i>&nbsp;<span
+              class="wx hiddenText"
+            ></span>
+          </div>
+          <div class="text-md ps-2">
+            <i class="fa-solid fa-hand-point-right"></i>&nbsp;<span
+              class="temp hiddenText"
+            ></span>
+          </div>
+          <div class="text-md ps-2">
+            <i class="fa-solid fa-hand-point-right"></i>&nbsp;<span
+              class="ci hiddenText"
+            ></span>
+          </div>
+          <div class="text-md ps-2 mb-5">
+            <i class="fa-solid fa-hand-point-right"></i>&nbsp;<span
+              class="pop hiddenText"
+            ></span>
+          </div>
+          <div
+            class="bg--[#EAEAEA] w-full h-1 flex justify-center items-center text-indigo-300"
+          >
+            ＊＊＊＊＊＊＊＊＊＊
+          </div>
+        </div>
+      </section>
 
       <!-- img 對話框 -->
       <img
@@ -270,6 +328,13 @@
       const chooseBtn = document.querySelector(".chooseBtn");
       const caret = document.querySelector(".caret");
 
+      const displayResults = document.querySelector(".displayResults");
+      const chosenLocation = document.querySelector(".chosenLocation");
+      const wx = document.querySelector(".wx");
+      const temp = document.querySelector(".temp");
+      const pop = document.querySelector(".pop");
+      const ci = document.querySelector(".ci");
+
       chooseBtn.addEventListener("click", (e) => {
         e.stopPropagation(); // 防止事件冒泡
 
@@ -296,7 +361,7 @@
         }
       });
 
-      const words = "今日の天気はどうですか";
+      const words = "今日の天気かどうですか";
       const word = words.split(""); // 原始字串陣列
       const el = document.getElementById("dialog");
       const dialogFrame = document.querySelector(".dialogFrame");
@@ -341,16 +406,107 @@
         // 重新加回 fadeIn 動畫
         dialogFrame.classList.add("animate__fadeIn");
         dialogContent.classList.add("animate__fadeIn");
+        displayResults.classList.remove("opacity-100");
+        displayResults.classList.add("opacity-0");
       });
 
-      // 點擊縣市 -> 隱藏 dialog
-      let locations = document.querySelectorAll(".location");
-      locations.forEach((location) =>
-        location.addEventListener("click", () => {
-          dialogFrame.style.display = "none";
-          dialogContent.style.display = "none";
-        })
-      );
+      // 串接氣象 api
+      async function fetchWeatherData() {
+        try {
+          const response = await axios.get(
+            "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-5C6909B6-56C5-4CA5-AD45-D212D9E3ECCE"
+          );
+
+          console.log(response.data);
+          console.log(
+            response.data.records.location[0].weatherElement[0].time[0]
+              .parameter
+          );
+
+          // 點擊縣市 -> 隱藏 dialog
+          let locations = document.querySelectorAll(".location");
+          locations.forEach((location) =>
+            location.addEventListener("click", () => {
+              dialogFrame.style.display = "none";
+              dialogContent.style.display = "none";
+              displayResults.classList.remove("opacity-0");
+              displayResults.classList.add("opacity-100");
+              response.data.records.location.forEach((locationData) => {
+                if (locationData.locationName === location.innerText.trim()) {
+                  chosenLocation.innerHTML = locationData.locationName;
+                  chosenLocation.dataset.text = locationData.locationName;
+
+                  wx.innerHTML =
+                    locationData.weatherElement[0].time[0].parameter.parameterName;
+                  wx.dataset.text =
+                    locationData.weatherElement[0].time[0].parameter.parameterName;
+
+                  temp.innerHTML = `${locationData.weatherElement[2].time[1].parameter.parameterName}°C - ${locationData.weatherElement[4].time[1].parameter.parameterName}°C`;
+                  temp.dataset.text = temp.innerHTML;
+
+                  pop.innerHTML = `降雨機率：${locationData.weatherElement[1].time[1].parameter.parameterName}%`;
+                  pop.dataset.text = pop.innerHTML;
+
+                  ci.innerHTML =
+                    locationData.weatherElement[3].time[1].parameter.parameterName;
+                  ci.dataset.text =
+                    locationData.weatherElement[3].time[1].parameter.parameterName;
+
+                  animateWeatherText();
+                }
+              });
+            })
+          );
+        } catch (error) {
+          console.error("發生錯誤：", error);
+        }
+      }
+
+      fetchWeatherData();
+
+      function animateWeatherText() {
+        // 把所有顯示文字先清空，並設為透明
+        const elements = [
+          { className: ".chosenLocation", chars: "upperCase" },
+          { className: ".wx", chars: "lowerCase" },
+          { className: ".temp", chars: "0123456789°C -" },
+          { className: ".ci", chars: "lowerCase" },
+          { className: ".pop", chars: "0123456789" },
+        ];
+
+        // 清空與設定透明
+        elements.forEach(({ className }) => {
+          const el = document.querySelector(className);
+          el.innerText = "";
+          el.style.opacity = "0";
+          el.classList.remove("hiddenText");
+        });
+
+        // 建立時間軸動畫
+        const tl = gsap.timeline({
+          defaults: { duration: 2, ease: "power2.out" },
+        });
+
+        // 一項一項淡入 + scrambleText
+        elements.forEach(({ className, chars }, index) => {
+          const el = document.querySelector(className);
+          const text = el.dataset.text;
+
+          tl.to(
+            el,
+            {
+              opacity: 1,
+              scrambleText: {
+                text,
+                chars,
+                speed: 5,
+                tweenLength: false,
+              },
+            },
+            `+=${index === 0 ? 0 : 0.2}`
+          ); // 每段延遲 0.2 秒
+        });
+      }
     </script>
   </body>
 </html>
