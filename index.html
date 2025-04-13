@@ -267,7 +267,7 @@
           <div
             class="bg--[#EAEAEA] w-full h-1 mb-5 flex justify-center items-center text-indigo-300"
           >
-            ＊＊＊＊＊＊＊＊＊＊
+            ＿／＿／＿／＿／＿／
           </div>
           <div class="text-md ps-2">
             <i class="fa-solid fa-hand-point-right"></i>&nbsp;<span
@@ -292,7 +292,7 @@
           <div
             class="bg--[#EAEAEA] w-full h-1 flex justify-center items-center text-indigo-300"
           >
-            ＊＊＊＊＊＊＊＊＊＊
+            ＿／＿／＿／＿／＿／
           </div>
         </div>
       </section>
@@ -356,13 +356,14 @@
           !areasDropMenu.contains(e.target)
         ) {
           areasDropMenu.classList.add("hidden");
-          caret.querySelector("i").classList.add("fa-caret-down");
-          caret.querySelector("i").classList.remove("fa-caret-up");
+          caret
+            .querySelector("i")
+            .classList.replace("fa-caret-down", "fa-caret-up");
         }
       });
 
-      const words = "今日の天気かどうですか";
-      const word = words.split(""); // 原始字串陣列
+      const words = "今日の天気がどうですか";
+      const word = words.split("");
       const el = document.getElementById("dialog");
       const dialogFrame = document.querySelector(".dialogFrame");
       const dialogContent = document.querySelector(".dialogContent");
@@ -394,8 +395,7 @@
         setTimeout(dialogShow, 1000);
 
         // 移除 fadeIn 動畫
-        dialogFrame.classList.remove("animate__fadeIn");
-        dialogContent.classList.remove("animate__fadeIn");
+        dialogFrame.classList.remove("animate__fadeIn", "animate__fadeIn");
 
         // 觸發瀏覽器 強制回流／重繪 (Reflow)
         void dialogFrame.offsetWidth;
@@ -406,8 +406,7 @@
         // 重新加回 fadeIn 動畫
         dialogFrame.classList.add("animate__fadeIn");
         dialogContent.classList.add("animate__fadeIn");
-        displayResults.classList.remove("opacity-100");
-        displayResults.classList.add("opacity-0");
+        displayResults.classList.replace("opacity-100", "opacity-0");
       });
 
       // 串接氣象 api
@@ -417,11 +416,11 @@
             "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-5C6909B6-56C5-4CA5-AD45-D212D9E3ECCE"
           );
 
-          console.log(response.data);
-          console.log(
-            response.data.records.location[0].weatherElement[0].time[0]
-              .parameter
-          );
+          // console.log(response.data);
+          // console.log(
+          //   response.data.records.location[0].weatherElement[0].time[0]
+          //     .parameter
+          // );
 
           // 點擊縣市 -> 隱藏 dialog
           let locations = document.querySelectorAll(".location");
@@ -465,7 +464,6 @@
       fetchWeatherData();
 
       function animateWeatherText() {
-        // 把所有顯示文字先清空，並設為透明
         const elements = [
           { className: ".chosenLocation", chars: "upperCase" },
           { className: ".wx", chars: "lowerCase" },
@@ -474,24 +472,20 @@
           { className: ".pop", chars: "0123456789" },
         ];
 
-        // 清空與設定透明
-        elements.forEach(({ className }) => {
-          const el = document.querySelector(className);
-          el.innerText = "";
-          el.style.opacity = "0";
-          el.classList.remove("hiddenText");
-        });
-
-        // 建立時間軸動畫
         const tl = gsap.timeline({
           defaults: { duration: 2, ease: "power2.out" },
         });
 
-        // 一項一項淡入 + scrambleText
-        elements.forEach(({ className, chars }, index) => {
+        elements.forEach(({ className, chars }) => {
           const el = document.querySelector(className);
           const text = el.dataset.text;
 
+          // 清空並移除隱藏樣式
+          el.textContent = "";
+          el.style.opacity = "0";
+          el.classList.remove("hiddenText");
+
+          // 加入動畫
           tl.to(
             el,
             {
@@ -503,8 +497,8 @@
                 tweenLength: false,
               },
             },
-            `+=${index === 0 ? 0 : 0.2}`
-          ); // 每段延遲 0.2 秒
+            0
+          ); // 所有動畫同時開始
         });
       }
     </script>
