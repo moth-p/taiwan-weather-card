@@ -262,7 +262,9 @@
           class="w-full h-full text-[#EAEAEA] bg-[#586DE8] flex flex-col justify-start items-start gap-3 p-8"
         >
           <div class="text-3xl font-bold mb-5">
-            <span class="chosenLocation hiddenText">台中市</span>
+            <span class="chosenLocation hiddenText"></span>&nbsp;<span
+              class="date hiddenText text-sm"
+            ></span>
           </div>
           <div
             class="bg--[#EAEAEA] w-full h-1 mb-5 flex justify-center items-center text-indigo-300"
@@ -327,13 +329,6 @@
       const areasDropMenu = document.querySelector(".areasDropMenu");
       const chooseBtn = document.querySelector(".chooseBtn");
       const caret = document.querySelector(".caret");
-
-      const displayResults = document.querySelector(".displayResults");
-      const chosenLocation = document.querySelector(".chosenLocation");
-      const wx = document.querySelector(".wx");
-      const temp = document.querySelector(".temp");
-      const pop = document.querySelector(".pop");
-      const ci = document.querySelector(".ci");
 
       chooseBtn.addEventListener("click", (e) => {
         e.stopPropagation(); // 防止事件冒泡
@@ -409,6 +404,17 @@
         displayResults.classList.replace("opacity-100", "opacity-0");
       });
 
+      const displayResults = document.querySelector(".displayResults");
+      const chosenLocation = document.querySelector(".chosenLocation");
+      const date = document.querySelector(".date");
+
+      const wx = document.querySelector(".wx");
+      const temp = document.querySelector(".temp");
+      const pop = document.querySelector(".pop");
+      const ci = document.querySelector(".ci");
+
+      const theDate = new Date(); // 抓取今天的日期、小時
+
       // 串接氣象 api
       async function fetchWeatherData() {
         try {
@@ -416,7 +422,7 @@
             "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-5C6909B6-56C5-4CA5-AD45-D212D9E3ECCE"
           );
 
-          // console.log(response.data);
+          console.log(response.data);
           // console.log(
           //   response.data.records.location[0].weatherElement[0].time[0]
           //     .parameter
@@ -432,24 +438,33 @@
               displayResults.classList.add("opacity-100");
               response.data.records.location.forEach((locationData) => {
                 if (locationData.locationName === location.innerText.trim()) {
-                  chosenLocation.innerHTML = locationData.locationName;
                   chosenLocation.dataset.text = locationData.locationName;
 
-                  wx.innerHTML =
-                    locationData.weatherElement[0].time[0].parameter.parameterName;
-                  wx.dataset.text =
-                    locationData.weatherElement[0].time[0].parameter.parameterName;
+                  date.dataset.text = `${
+                    theDate.getMonth() + 1
+                  }/${theDate.getDate()}`;
 
-                  temp.innerHTML = `${locationData.weatherElement[2].time[1].parameter.parameterName}°C - ${locationData.weatherElement[4].time[1].parameter.parameterName}°C`;
-                  temp.dataset.text = temp.innerHTML;
+                  if (theDate.getHours() <= 18) {
+                    wx.dataset.text =
+                      locationData.weatherElement[0].time[0].parameter.parameterName;
 
-                  pop.innerHTML = `降雨機率：${locationData.weatherElement[1].time[1].parameter.parameterName}%`;
-                  pop.dataset.text = pop.innerHTML;
+                    temp.dataset.text = `${locationData.weatherElement[2].time[0].parameter.parameterName}°C - ${locationData.weatherElement[4].time[0].parameter.parameterName}°C`;
 
-                  ci.innerHTML =
-                    locationData.weatherElement[3].time[1].parameter.parameterName;
-                  ci.dataset.text =
-                    locationData.weatherElement[3].time[1].parameter.parameterName;
+                    pop.dataset.text = `降雨機率：${locationData.weatherElement[1].time[0].parameter.parameterName}%`;
+
+                    ci.dataset.text =
+                      locationData.weatherElement[3].time[0].parameter.parameterName;
+                  } else if (18 < theDate.getHours()) {
+                    wx.dataset.text =
+                      locationData.weatherElement[0].time[1].parameter.parameterName;
+
+                    temp.dataset.text = `${locationData.weatherElement[2].time[1].parameter.parameterName}°C - ${locationData.weatherElement[4].time[1].parameter.parameterName}°C`;
+
+                    pop.dataset.text = `降雨機率：${locationData.weatherElement[1].time[1].parameter.parameterName}%`;
+
+                    ci.dataset.text =
+                      locationData.weatherElement[3].time[1].parameter.parameterName;
+                  }
 
                   animateWeatherText();
                 }
@@ -466,6 +481,7 @@
       function animateWeatherText() {
         const elements = [
           { className: ".chosenLocation", chars: "upperCase" },
+          { className: ".date", chars: "0123456789" },
           { className: ".wx", chars: "lowerCase" },
           { className: ".temp", chars: "0123456789°C -" },
           { className: ".ci", chars: "lowerCase" },
