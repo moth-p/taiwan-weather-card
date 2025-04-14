@@ -80,13 +80,6 @@ git clone https://github.com/your-repo-name
 5. 點擊右上角 Reset 可重新播放動畫與對話內容
 
 ---
-
-## 效果預覽
-
-![weather-ui-preview](https://user-images.githubusercontent.com/your-image-preview.gif)
-
----
-
 ## License
 
 本專案為學習與展示用途。
